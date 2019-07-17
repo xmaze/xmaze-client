@@ -68,8 +68,8 @@ var MazeWorld = function() {
 
 			var _door_url = document.getElementById( 'question-url' ).value;
 			var _key = document.getElementById( 'answer-box' ).value;
-			loadMazeData( "https://api.xmaze.xyz/room" + _door_url + "/?format=json&key=" + _key, function( data ) {
-			// loadMazeData( "https://api.xmaze.xyz" + _door_url + "/?format=json&key=" + _key, function( data ) {
+			loadMazeData( "https://api.xmaze.mindey.com/room" + _door_url + "/?format=json&key=" + _key, function( data ) {
+			// loadMazeData( "https://api.xmaze.mindey.com + _door_url + "/?format=json&key=" + _key, function( data ) {
 				var _data = JSON.parse( data );
 				if ( _data.result === undefined ) {
 					buildMazeFromData( data, findTunnelObjFromName( g_collide_door_obj.userData.name ) );
@@ -156,7 +156,7 @@ var MazeWorld = function() {
 	    // g_container.appendChild( g_stats.dom );
 
 	    // test();
-	    loadMazeData( "https://api.xmaze.xyz/room/sample/?format=json", function( data ) {
+	    loadMazeData( "https://api.xmaze.mindey.com/room/sample/?format=json", function( data ) {
 	    	buildMazeFromData( data );
 	    } );
 	    // ajax_test();
@@ -173,7 +173,7 @@ var MazeWorld = function() {
 		    }
 	  	};
  
-	  	xhttp.open("GET", "https://api.xmaze.xyz/room/sample/?format=json", true);
+	  	xhttp.open("GET", "https://api.xmaze.mindey.com/room/sample/?format=json", true);
 	  	// xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
 	  	// xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
 	  	// xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
@@ -466,7 +466,7 @@ var MazeWorld = function() {
 var mazeWorld = new MazeWorld();
 mazeWorld.initialize();
 
-// var str = "https://api.xmaze.xyz/room/sample/door/orange/?format=json&key=13";
+// var str = "https://api.xmaze.mindey.com/room/sample/door/orange/?format=json&key=13";
 // var n = str.indexOf("/door/");
 // var m = str.indexOf("/", n+6);
 // var s = str.substring(n+6,m);
