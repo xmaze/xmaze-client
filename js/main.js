@@ -69,7 +69,7 @@ var MazeWorld = function() {
 			var _door_url = document.getElementById( 'question-url' ).value;
 			var _key = document.getElementById( 'answer-box' ).value;
 			loadMazeData( "https://api.xmaze.mindey.com/room" + _door_url + "/?format=json&key=" + _key, function( data ) {
-			// loadMazeData( "https://api.xmaze.mindey.com + _door_url + "/?format=json&key=" + _key, function( data ) {
+			// loadMazeData( "https://api.xmaze.mindey.com" + _door_url + "/?format=json&key=" + _key, function( data ) {
 				var _data = JSON.parse( data );
 				if ( _data.result === undefined ) {
 					buildMazeFromData( data, findTunnelObjFromName( g_collide_door_obj.userData.name ) );
@@ -436,18 +436,18 @@ var MazeWorld = function() {
 	}
 
 	function render() {
+
+		// Render the actual maze without player location indicator inside.
 		g_player.visible = false;
 		g_renderer.setViewport( 0, 0, window.innerWidth, window.innerHeight );
 		g_renderer.setScissor( 0, 0, window.innerWidth, window.innerHeight );
 		g_renderer.clear();
 		g_renderer.render( g_scene, g_player_cam.camera );
 
+		// Render the Mini-Map with player location indicator inside.
 		g_player.visible = true;
-
-		// renderer.setViewport( 0, 0, window.innerWidth * 0.3, window.innerHeight * 0.3 );
-		// renderer.setScissor( 0, 0, window.innerWidth * 0.3, window.innerHeight * 0.3 );
-		g_renderer.setViewport( window.innerWidth - 300, 0, 300, 300 );
-		g_renderer.setScissor( window.innerWidth - 300, 0, 300, 300 );
+		g_renderer.setViewport( 20, 20, 270, 270 );
+		g_renderer.setScissor( 20, 20, 400, 400 );
 		g_renderer.clear();
 		g_renderer.render( g_scene, g_mapCamera );
 	}
@@ -466,7 +466,7 @@ var MazeWorld = function() {
 var mazeWorld = new MazeWorld();
 mazeWorld.initialize();
 
-// var str = "https://api.xmaze.mindey.com/room/sample/door/orange/?format=json&key=13";
+// var str = "https://api.xmaze.xyz/room/sample/door/orange/?format=json&key=13";
 // var n = str.indexOf("/door/");
 // var m = str.indexOf("/", n+6);
 // var s = str.substring(n+6,m);

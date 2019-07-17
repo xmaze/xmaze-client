@@ -70,8 +70,8 @@ body {
 }
 
 .chat-panel {
-	position: absolute; 
-	left: 0px; 
+	position: absolute;
+	right: 0px;
 	bottom: 0px; 
 	width: 400px; 
 	height: 300px; 
