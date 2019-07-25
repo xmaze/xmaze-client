@@ -68,8 +68,7 @@ var MazeWorld = function() {
 
 			var _door_url = document.getElementById( 'question-url' ).value;
 			var _key = document.getElementById( 'answer-box' ).value;
-			loadMazeData( "https://api.xmaze.mindey.com/room" + _door_url + "/?format=json&key=" + _key, function( data ) {
-			// loadMazeData( "https://api.xmaze.mindey.com" + _door_url + "/?format=json&key=" + _key, function( data ) {
+			loadMazeData( "http://localhost:8000/room" + _door_url + "/?format=json&key=" + _key, function( data ) {
 				var _data = JSON.parse( data );
 				if ( _data.result === undefined ) {
 					buildMazeFromData( data, findTunnelObjFromName( g_collide_door_obj.userData.name ) );
@@ -156,7 +155,7 @@ var MazeWorld = function() {
 	    // g_container.appendChild( g_stats.dom );
 
 	    // test();
-	    loadMazeData( "https://api.xmaze.mindey.com/room/sample/?format=json", function( data ) {
+	    loadMazeData( "http://localhost:8000/room/home/?format=json", function( data ) {
 	    	buildMazeFromData( data );
 	    } );
 	    // ajax_test();
@@ -172,8 +171,8 @@ var MazeWorld = function() {
 		      	console.log(this.responseText);
 		    }
 	  	};
- 
-	  	xhttp.open("GET", "https://api.xmaze.mindey.com/room/sample/?format=json", true);
+
+	  	xhttp.open("GET", "http://localhost:8000/room/home/?format=json", true);
 	  	// xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
 	  	// xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
 	  	// xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
@@ -189,7 +188,7 @@ var MazeWorld = function() {
 		      	cbSuccess( this.responseText );
 		    }
 	  	};
- 
+
 	  	xhttp.open("GET", url, true);
 	  	xhttp.send();
 	}
@@ -200,11 +199,11 @@ var MazeWorld = function() {
 
 		var _mazeRoom = new MazeRoom( guid(), 200, 100, 150, tunnel_obj );
 		for ( var i = 0; i < _mazeData.room.doors.length; i++ ) {
-			if ( tunnel_obj != undefined && ( tunnel_obj.wall_name == 'left' && _mazeData.room.seq[i] == 'right' || 
-				tunnel_obj.wall_name == 'right'   && _mazeData.room.seq[i] == 'left' || 
-				tunnel_obj.wall_name == 'up'      && _mazeData.room.seq[i] == 'down' || 
-				tunnel_obj.wall_name == 'down'    && _mazeData.room.seq[i] == 'up' || 
-				tunnel_obj.wall_name == 'forward' && _mazeData.room.seq[i] == 'back' || 
+			if ( tunnel_obj != undefined && ( tunnel_obj.wall_name == 'left' && _mazeData.room.seq[i] == 'right' ||
+				tunnel_obj.wall_name == 'right'   && _mazeData.room.seq[i] == 'left' ||
+				tunnel_obj.wall_name == 'up'      && _mazeData.room.seq[i] == 'down' ||
+				tunnel_obj.wall_name == 'down'    && _mazeData.room.seq[i] == 'up' ||
+				tunnel_obj.wall_name == 'forward' && _mazeData.room.seq[i] == 'back' ||
 				tunnel_obj.wall_name == 'back'    && _mazeData.room.seq[i] == 'forward' )
 			) continue;
 		 	var _mazeTunnel = _mazeRoom.hangTunnel( _mazeData.room.seq[i], { x: 10, y: 10 }, { x: 20, y: 15 }, 300, _mazeData.room.doors[i] );
@@ -244,7 +243,7 @@ var MazeWorld = function() {
 		}
 
 		for ( var i = 0; i < g_tunnels.length; i++ ) {
-			if ( g_tunnels[i].mazeRoomRef_other != undefined && g_tunnels[i].mazeRoomRef_other.bbox.containsPoint( g_player.position ) ) 
+			if ( g_tunnels[i].mazeRoomRef_other != undefined && g_tunnels[i].mazeRoomRef_other.bbox.containsPoint( g_player.position ) )
 				return g_tunnels[i].mazeRoomRef_other;
 		}
 
@@ -297,7 +296,7 @@ var MazeWorld = function() {
 						g_tunnels[i].object3D.visible = true;
 						break;
 					}
-				} 
+				}
 				if ( g_tunnels[i].mazeRoomRef_other == undefined ) continue;
 				g_tunnels[i].mazeRoomRef_other.object3D.visible = false;
 				for ( var j = 0; j < rooms.length; j++ ) {
@@ -328,7 +327,7 @@ var MazeWorld = function() {
 		function findNeighRooms( currRoom ) {
 			var _ret = [];
 			for ( var i = 0; i < g_tunnels.length; i++ ) {
-				if ( g_tunnels[i].mazeRoomRef_other != undefined && g_tunnels[i].mazeRoomRef_other.name == currRoom.name ) 
+				if ( g_tunnels[i].mazeRoomRef_other != undefined && g_tunnels[i].mazeRoomRef_other.name == currRoom.name )
 					_ret.push( g_tunnels[i].mazeRoomRef );
 				else if ( g_tunnels[i].mazeRoomRef != undefined && g_tunnels[i].mazeRoomRef.name == currRoom.name && g_tunnels[i].mazeRoomRef_other != undefined )
 					_ret.push( g_tunnels[i].mazeRoomRef_other );
@@ -466,7 +465,7 @@ var MazeWorld = function() {
 var mazeWorld = new MazeWorld();
 mazeWorld.initialize();
 
-// var str = "https://api.xmaze.xyz/room/sample/door/orange/?format=json&key=13";
+// var str = "https://api.xmaze.xyz/room/home/door/orange/?format=json&key=13";
 // var n = str.indexOf("/door/");
 // var m = str.indexOf("/", n+6);
 // var s = str.substring(n+6,m);
