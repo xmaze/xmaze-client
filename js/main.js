@@ -213,7 +213,7 @@ var MazeWorld = function() {
       g_tunnels.push( _mazeTunnel );
     }
     var _texture = _mazeData.room.tex || 'tex/default.png';
-    if (_texture.startsWith('http')) {
+    if (_texture.startsWith('http') || _texture.startsWith('/static/')) {
       _texture = serverBase+'/cors/?url=' + _texture;
     }
     _mazeRoom.createRoom( _texture ); console.log('ROOM-TEX:', _mazeData.room.tex);
