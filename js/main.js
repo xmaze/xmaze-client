@@ -1,5 +1,11 @@
 var serverBase = 'http://localhost:8000';
 
+// override, when used as part of /static/ in server.
+if (window.location.href.endsWith("/static/client/index.html")) {
+  var urlParts = window.location.href.split("/");
+  var serverBase = urlParts[0] + "//" + urlParts[2];
+}
+
 var MazeWorld = function() {
   var g_camera;
   var g_scene;
